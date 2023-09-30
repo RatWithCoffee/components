@@ -3,7 +3,7 @@ import { CommitSvg, DropSvg } from '../../svg'
 
 export const CommitsButton = ({ commit, handleSelectBranch, ...props }) => {
     return (
-        <div className="header_capsule.current">
+        <div className="header__capsule current">
             <div className='icon-type'>
                 <CommitSvg />
             </div>

@@ -18,23 +18,23 @@ export const Header = ({ title, author, time, branches, commits, parents, ...pro
     }
 
     return (<div className='header'>
-        <div className='header_top'>
-            <div className='header_commit-msg'>{title}</div>
-            <div className='header_commit-author'>
+        <div className='header__top'>
+            <div className='header__commit-msg'>{title}</div>
+            <div className='header__commit-author'>
                 <div className='icon-type'>
                     <AuthorSvg />
                 </div>
                 <span>{author}</span>
             </div>
-            <div className='header_commit-time'>
+            <div className='header__commit-time'>
                 <div className='icon-type'>
                     <TimeSvg />
                 </div>
-                <span>{time}</span>
+                <div>{time}</div>
             </div>
         </div>
 
-        <div className='header_bottom'>
+        <div className='header__bottom'>
             <BranchesButton branch={branch} handleSelectBranch={handleSelectBranch} />
             {parents.map((e) =>
                 <ParentCommit commit={e} />
@@ -44,6 +44,5 @@ export const Header = ({ title, author, time, branches, commits, parents, ...pro
             </div>
             <CommitsButton commit={commit} handleSelectCommit={handleSelectCommit} />
         </div>
-
     </div>);
 }

@@ -3,7 +3,7 @@ import { BranchSvg, DropSvg } from '../../svg'
 
 export const BranchesButton = ({ branch, handleSelectBranch, ...props }) => {
     return (
-        <div className='header_capsule'>
+        <div className='header__capsule'>
             <div className='icon-type'>
                 <BranchSvg />
             </div>

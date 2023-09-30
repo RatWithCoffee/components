@@ -1,0 +1,267 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;500;700&family=Source+Code+Pro:wght@300;500&display=swap');
+
+:root {
+    --flame-primary: #AE4CFB;
+    --flame-secondary: #7B68EE;
+    --flame-success: #5BBA4B;
+    --flame-error: #F76854;
+    --flame-light: #9D9DAC;
+    --flame-gray-bat: #282833;
+    --flame-white: #FFFFFF;
+    --flame-extra-light: #F5F5FA;
+    --diff-add: #E0FFEB;
+    --diff-remove: #FFE0E0;
+}
+@mixin opacity_animation {
+    opacity: .6;
+    transition: opacity .4s;
+
+    &:hover {
+        opacity: 1;
+    }
+}
+
+@mixin container {
+    width: 100%;
+    border-radius: .8rem;
+    padding: 1rem;
+    box-shadow: 0 2px 4px var(--flame-light);
+    overflow: hidden;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Manrope', sans-serif;
+}
+
+.icon-type,
+.icon-drop {
+    height: 2rem;
+    width: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+}
+
+.icon-drop {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(-50%, -50%);
+    transition: transform .4s;
+    opacity: .6;
+
+    &.active {
+        transform: translate(-50%, -50%), rotate(180deg);
+    }
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    padding: 1rem;
+    background-color: var(--flame-extra-light);
+    gap: 1rem;
+}
+
+.header {
+    @include container;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--flame-gray-bat);
+
+    &__top {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    &__bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__capsule {
+        font-size: 1.6rem;
+        border: .2rem solid var(--flame-white);
+        padding: .5rem 3rem .5rem 1rem;
+        border-radius: 100rem;
+        position: relative;
+    }
+
+    &__link {
+        text-decoration: none;
+        color: var(--flame-white);
+        @include opacity_animation;
+    }
+
+    &__commit-msg {
+        font-size: 2.4rem;
+    }
+
+    &__commit-time,
+    &__commit-author {
+        font-size: 1.6rem;
+        opacity: .6;
+    }
+}
+
+.top-line {
+    height: 4px;
+    width: 100%;
+}
+
+.body {
+    display: grid;
+    grid-template-columns: 30% 1fr;
+    column-gap: 1rem;
+    flex: 1;
+
+    .file-tree {
+        @include container;
+
+        .top-line {
+            background-color: var(--flame-primary);
+        }
+
+        &__inner {
+            width: 100%;
+            height: calc(100% - 4px);
+            padding: 0 .5rem;
+        }
+
+        .dir {
+            width: 100%;
+            font-weight: 200;
+
+            &__title {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                padding-right: 2rem;
+                font-weight: 500;
+            }
+
+            &__contain {
+                width: 100%;
+                padding-left: 2rem;
+            }
+        }
+
+        .file {
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    .diff-container {
+        @include container;
+        background-color: var(--flame-white);
+        position: relative;
+
+        .top-line {
+            background-color: var(--flame-secondary);
+        }
+
+        &__inner {
+            width: 100%;
+            height: calc(100% - 4px);
+            padding: 0 2rem;
+        }
+
+        &__settings {
+            display: flex;
+            overflow: hidden;
+            border-radius: 100rem;
+
+            .settings {
+                &__part {
+                    width: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background-color: var(--flame-light);
+                    color: var(--flame-extra-light);
+                    transition: color .4s, background-color .4s;
+
+                    &.active {
+                        background-color: var(--flame-extra-light);
+                        color: var(--flame-light);
+                    }
+                }
+            }
+        }
+
+        .diff {
+            @include container;
+            @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;500&display=swap');
+
+            &__title {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 1rem 3rem;
+            }
+
+            &__table-container {
+
+                table {
+                    width: 100%;
+                }
+
+                tr {
+                    height: 14px;
+                    line-height: 14px;
+
+                    td.num {
+                        border-right: 1px solid var(--flame-primary);
+                        font-weight: 200;
+                    }
+
+                    td.code {
+                        color: var(--flame-light);
+                        font-weight: 500;
+                        font-size: 10px;
+                    }
+                }
+
+                tr:has(td.anchor) {
+                    background-color: var(--flame-extra-light);
+                    color: var(--flame-white);
+
+                    td.up,
+                    td.down {
+                        @include opacity_animation;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 100%;
+                        height: 100%;
+                    }
+
+                    td.anchor {
+                        font-size: 10px;
+                        font-weight: 300;
+                    }
+
+                }
+
+                tr.remove {
+                    background-color: var(--diff-remove);
+                }
+
+                tr.add {
+                    background-color: var(--diff-add);
+                }
+            }
+        }
+    }
+}
